@@ -164,12 +164,18 @@ app.put("/update-event", isSignIn, async (req, res) => {
   try {
     const { eventId, summary, description, start, end } = req.body;
     const { email } = req.query;
-    console.log(eventId);
-    console.log(summary);
-    console.log(start);
-    console.log(description);
-    console.log(end);
-    console.log(email);
+
+    if (!eventId) {
+      throw new Error("Event ID is required");
+    }
+
+    console.log("Received eventId:", eventId);
+    console.log("Summary:", summary);
+    console.log("Start:", start);
+    console.log("Description:", description);
+    console.log("End:", end);
+    console.log("Email:", email);
+
     // Update the event in Google Calendar
     await calendar.events.update({
       calendarId: "primary",
